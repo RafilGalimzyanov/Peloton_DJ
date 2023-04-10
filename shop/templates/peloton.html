@@ -1,0 +1,110 @@
+{% extends 'main.html' %}
+{% block title %}<title>ГК ПЕЛОТОН</title>{% endblock %}
+{% block description %}<meta name="description" content="Оплата и доставка в Интернет-магазине." />{% endblock %}
+{% block keywords %}
+    <meta name="keywords" content="оплата, доставка, оплата доставка магазин" />
+{% endblock %}
+{% block content %}
+{% load static %}
+<html>
+<head>
+	<style>
+	/* Styling the area of the slides */
+
+	#slideshow {
+		overflow: hidden;
+		height: 245px;
+		width: 735px;
+		margin: 0px s;
+	}
+
+	/* Style each of the sides
+	with a fixed width and height */
+
+	.slide {
+		float: left;
+		height: 510px;
+		width: 728px;
+	}
+
+	/* Add animation to the slides */
+
+	.slide-wrapper {
+
+		/* Calculate the total width on the
+	basis of number of slides */
+		width: calc(728px * 4);
+
+		/* Specify the animation with the
+	duration and speed */
+		animation: slide 10s ease infinite;
+	}
+
+	/* Set the background color
+	of each of the slides */
+
+	/* Define the animation
+	for the slideshow */
+
+	@keyframes slide {
+
+		/* Calculate the margin-left for
+	each of the slides */
+		20% {
+			margin-left: 0px;
+		}
+		40% {
+			margin-left: calc(-728px * 1);
+		}
+		60% {
+			margin-left: calc(-728px * 2);
+		}
+	}
+	</style>
+</head>
+<body>
+	<!-- Define the slideshow container -->
+	<div id="slideshow">
+		<div class="slide-wrapper">
+			<!-- Define each of the slides
+		and write the content -->
+			<div class="slide">
+				<h1 class="slide-number">
+					<img src="{% static 'images/slide1.png' %} ">
+				</h1>
+			</div>
+			<div class="slide">
+				<h1 class="slide-number">
+					<img src="{% static 'images/slide2.jpg' %} ">
+				</h1>
+			</div>
+			<div class="slide">
+				<h1 class="slide-number">
+					<img src="{% static 'images/slide3.jpg' %} ">
+				</h1>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+  <h2 align="center"> ГК ПЕЛОТОН</h2>
+<div id="article">
+	<p>Торговая компания «Пелотон», г. Красноярск, основана в ноябре 1995 года.
+Наша компания является дистрибутором продуктов питания на территории г. Красноярска и Красноярского края, республики Хакасия и Тыва. По видам продукции можно выделить следующие направления, по которым мы работаем:</p>
+    <ul>
+      <li>Молочная продукция, сыры</li>
+      <li>Соки и нектары</li>
+      <li>Кондитерские изделия</li>
+      <li>Морепродукты</li>
+      <li>Детское питание</li>
+    </ul>
+    <p>Компания "ПЕЛОТОН" сегодня - это:</p>
+    <ul>
+      <li>складские комплексы в г. Красноярск и в г. Абакане, площадью 2500 кв.м. и 800 кв. м. соответственно., с интегрированными в него офисными блоками;</li>
+      <li>современное стеллажное оборудование и складская техника</li>
+      <li>удобное расположение складов в городской черте с наличием подъездных путей для железнодорожного и автомобильного транспорта</li>
+      <li> 20 собственных грузовых автомобилей (Hyundai и Toyota), оборудованных холодильными установками и датчиками контроля температурного режима для поддержания оптимального температурного режима в летний и зимний период.</li>
+      </ul>
+    <p>Уже более 20 лет компания "ПЕЛОТОН" работает для своих клиентов, предлагая широкий выбор качественных и вкусных продуктов!Компания «Пелотон» - амбициозная развивающаяся компания, ведущая современный и ответственный бизнес!</p>
+</div>
+{% endblock %}

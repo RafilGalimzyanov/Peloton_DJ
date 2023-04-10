@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	{% block title %}<title>КАТАЛОГ</title>{% endblock %}
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	{% block description %}<meta name="description" content="Интернет-магазин по продаже продуктов питания." />{% endblock %}
+	{% block keywords %}
+		<meta name="keywords" content="интернет магазин, интернет магазин продуктов" />
+	{% endblock %}
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'styles/main.css' %}" type="text/css" />
+	<script type="text/javascript" src="{% static 'js/functions.js' %}"></script>
+	<link href="{% static 'favicon.ico' %}" rel="shortcut icon" type="image/x-icon" />
+</head>
+<body>
+	<div id="container">
+		<div id="header">
+			<img src="{% static 'images/header2.png' %}" alt="Шапка" />
+			<div>
+				<p style="color:#000c85"><b>+7 (391) 244-35-74</b></p>
+				<p style="color:#000c85"><b>ПН-ПТ с 09:00 до 18:00</b></p>
+				<p style="color:#000c85"><b>перерыв с 13:00 до 14.00</b></p>
+			</div>
+			<div class="cart">
+				<p class="cart_title">Корзина</p>
+				<p class="blue">Текущий заказ</p>
+				{% load my_filters %}
+				<p>В корзине <span>{{ count_in_cart }}</span> {{ count_in_cart|declension_of_products }}<br />на сумму <span>{{ sum_in_cart }}</span> руб.</p>
+				<a href="{% url 'cart' %}">Перейти в корзину</a>
+			</div>
+		</div>
+		<div id="topmenu">
+			<ul>
+				<li>
+					<a href="{% url 'peloton' %}">ПЕЛОТОН</a>
+				</li>
+				<li>
+					<a href="{% url 'index' %}">КАТАЛОГ</a>
+				</li>
+				<li>
+					<img src="{% static 'images/topmenu_border.png' %}" alt="" />
+				</li>
+				<li>
+					<a href="{% url 'delivery' %}">ОПЛАТА И ДОСТАВКА</a>
+				</li>
+				<li>
+					<img src="{% static 'images/topmenu_border.png' %}" alt="" />
+				</li>
+				<li>
+					<a href="{% url 'contacts' %}">КОНТАКТЫ</a>
+				</li>
+				<li>
+					<a href="{% url 'reviews' %}">ОТЗЫВЫ</a>
+				</li>
+				<li>
+					<a href="{% url 'job' %}">ВАКАНСИИ</a>
+				</li>
+			</ul>
+			<div id="search">
+				<form name="search" action="{% url 'search' %}" method="get">
+					<table>
+						<tr>
+							<td class="input_left"></td>
+							<td>
+								{{ search_form.q }}
+							</td>
+							<td class="input_right"></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+		<div id="content">
+			<div id="left">
+				<div class="menu">
+					<div class="header">
+						<h3>Разделы</h3>
+					</div>
+					<div class="items">
+						{% for section in sections %}
+							<p>
+								<a href="{{ section.get_absolute_url }}">{{ section.title }}</a>
+							</p>
+						{% endfor %}
+					</div>
+					<div class="bottom"></div>
+				</div>
+				<div class="menu">
+					<div class="header">
+						<h3>Пользователь</h3>
+					</div>
+					<div class="items">
+						{% if user.is_authenticated %}
+						<h5> Добро пожаловать,
+							{{request.user.username}}</h5>
+							<p>
+								<a href="{% url 'orders' %}">Мои заказы</a>
+							</p>
+							<p>
+								<a href="{% url 'logout' %}?next={{ request.path }}">Выход</a>
+							</p>
+						{% else %}
+							<p>
+								<a href="{% url 'login' %}?next={{ request.path }}">Вход</a>
+							</p>
+						{% endif %}
+					</div>
+					<div class="bottom"></div>
+				</div>
+			</div>
+			<div id="right">
+				{% block before_content %}{% endblock %}
+				{% block content %}{% endblock %}
+				{% block pagination %}{% endblock %}
+			</div>
+			<div id="footer">
+				<div id="copy">
+					<p>Все права защищены &copy; ГК Пелотон 2023</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

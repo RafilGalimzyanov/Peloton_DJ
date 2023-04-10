@@ -1,0 +1,35 @@
+{% extends 'main.html' %}
+{% block title %}<title>Заказы</title>{% endblock %}
+{% block description %}<meta name="description" content="Заказы." />{% endblock %}
+{% block keywords %}
+<meta name="keywords" content="заказы, заказы пользователя" />
+{% endblock %}
+{% block content %}
+    <div id="article">
+        <h2>Ваши заказы</h2>
+        <table border="1" id="orders">
+            <tr>
+                <td>ID заказа</td>
+                <td>Дата заказа</td>
+                <td>Состав заказа</td>
+                <td>Сумма</td>
+                <td>Статус</td>
+                <td>Функции</td>
+            </tr>
+            {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.date_order }}</td>
+                    <td>{{ order.display_products }}</td>
+                    <td>{{ order.display_amount }}</td>
+                    <td>{{ order.get_status_display }}</td>
+                    <td>
+                        {% if perms.shop.can_set_status and order.status == 'NEW' %}
+                            <a href="{% url 'cancelorder' order.id %}">Отмена заказа</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

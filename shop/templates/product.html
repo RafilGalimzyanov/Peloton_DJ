@@ -1,0 +1,14 @@
+<td>
+    <div class="intro_product">
+        <p class="img">
+            <img src="{{ MEDIA_URL }}{{ product.image.url }}" alt="{{ product.title }}" />
+        </p>
+        <p class="title">
+            <a href="{% url 'product' product.slug %}">{{ product.title }}</a>
+        </p>
+        <p class="price">{{ product.price }} руб.</p>
+        <p>
+            <a class="link_cart" href="{{ request.path }}?add_cart={{ product.id }}"></a>
+        </p>
+    </div>
+</td>

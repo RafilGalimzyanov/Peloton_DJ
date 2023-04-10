@@ -1,0 +1,108 @@
+{% extends 'main.html' %}
+{% block title %}<title>Корзина</title>{% endblock %}
+{% block description %}<meta name="description" content="Содержимое корзины." />{% endblock %}
+{% block keywords %}
+<meta name="keywords" content="корзина, содержимое корзины" />
+{% endblock %}
+{% block content %}
+    <div id="cart">
+        <h2>Корзина</h2>
+        {% if products %}
+            <form name="cart" action="{% url 'cart' %}" method="post">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td colspan="8" id="cart_top"></td>
+                    </tr>
+                    <tr>
+                        <td class="cart_left"></td>
+                        <td colspan="2">Товар</td>
+                        <td>Цена за 1 шт.</td>
+                        <td>Количество</td>
+                        <td>Стоимость</td>
+                        <td></td>
+                        <td class="cart_right"></td>
+                    </tr>
+                    {% for product in products %}
+                        <tr>
+                            <td class="cart_left"></td>
+                            <td colspan="6">
+                                <hr />
+                            </td>
+                            <td class="cart_right"></td>
+                        </tr>
+                        <tr class="cart_row">
+                            <td class="cart_left"></td>
+                            <td class="img">
+                                <img src="{{ product.image.url }}" alt="{{ product.title }}" />
+                            </td>
+                            <td class="title">{{ product.title }}</td>
+                            <td>{{ product.price }} руб.</td>
+                            <td>
+                                <table class="count">
+                                    <tr>
+                                        <td>
+                                            <input type="text" name="count_{{ product.id }}" value="{{ product.count }}" />
+                                        </td>
+                                        <td>шт.</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td class="bold">{{ product.get_sum_price }} руб.</td>
+                            <td>
+                                <a href="{{ request.path }}?delete_cart={{ product.id }}" class="link_delete">x удалить</a>
+                            </td>
+                            <td class="cart_right"></td>
+                        </tr>
+                    {% endfor %}
+                    <tr id="discount">
+                        <td class="cart_left"></td>
+                        <td colspan="6">
+                            <table>
+                                <tr>
+                                    <td>Введите номер купона со скидкой<br /><span>(если есть)</span></td>
+                                    <td>
+                                        <input type="text" name="discount" value="{{ discount }}" />
+                                    </td>
+                                    <td>
+                                        {% load static %}
+                                        <input type="image" src="{% static 'images/cart_discount.png' %}" alt="Получить скидку" onmouseover="this.src='{% static 'images/cart_discount_active.png' %}'" onmouseout="this.src='{% static 'images/cart_discount.png' %}'" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="cart_right"></td>
+                    </tr>
+                    <tr id="summa">
+                        <td class="cart_left"></td>
+                        <td colspan="6">
+                            <p>Итого{% if discount %} со скидкой{% endif %}: <span>{{ sum_in_cart }} руб.</span></p>
+                        </td>
+                        <td class="cart_right"></td>
+                    </tr>
+                    <tr>
+                        <td class="cart_left"></td>
+                        <td colspan="2">
+                            <div class="left">
+                                <input type="image" src="{% static 'images/cart_recalc.png' %}" alt="Пересчитать" onmouseover="this.src='{% static 'images/cart_recalc_active.png' %}'" onmouseout="this.src='{% static 'images/cart_recalc.png' %}'" />
+                            </div>
+                        </td>
+                        <td colspan="4">
+                            <div class="right">
+                                <a href="{% url 'order' %}">
+                                    <img src="{% static 'images/cart_order.png' %}" alt="Оформить заказ" onmouseover="this.src='{% static 'images/cart_order_active.png' %}'" onmouseout="this.src='{% static 'images/cart_order.png' %}'" />
+                                </a>
+                            </div>
+                        </td>
+                        <td class="cart_right"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="8" id="cart_bottom"></td>
+                    </tr>
+                </table>
+            </form>
+        {% else %}
+            <p>Корзина пуста :(</p>
+        {% endif %}
+    </div>
+{% endblock %}

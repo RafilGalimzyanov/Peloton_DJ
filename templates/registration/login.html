@@ -1,0 +1,30 @@
+{% extends 'main.html' %}
+{% block title %}<title>Авторизация</title>{% endblock %}
+{% block description %}<meta name="description" content="Авторизация пользователя." />{% endblock %}
+{% block keywords %}
+<meta name="keywords" content="авторизация, вход" />
+{% endblock %}
+{% block content %}
+<div id="order">
+    <h2>Авторизация</h2>
+    <form name="login" action="" method="post">
+        {% csrf_token %}
+        {% if form.errors %}
+            <p>Неверные имя пользователя и/или пароль!</p>
+        {% endif %}
+        <table>
+            <tr>
+                <td>{{ form.username.label }}:</td>
+                <td>{{ form.username }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.password.label }}:</td>
+                <td>{{ form.password }}</td>
+            </tr>
+        </table>
+        <input type="hidden" name="next" value="{{ next }}" />
+        <input type="submit" value="Войти" />
+    </form>
+    <p><a href="{% url 'password_reset' %}">Восстановление пароля</a></p>
+</div>
+{% endblock %}

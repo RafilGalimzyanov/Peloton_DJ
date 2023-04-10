@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+{% block title %}<title>Страница не найдена - 404</title>{% endblock %}
+{% block description %}<meta name="description" content="Запрошенная страница не существует." />{% endblock %}
+{% block keywords %}
+<meta name="keywords" content="страница не найдена, страница не существует, 404" />
+{% endblock %}
+{% block content %}
+<div id="message">
+    <h2>Страница не существует</h2>
+    <p>Возможно, Вы ошиблись при вводе адреса.<br />Вернуться на <a href="{% url 'peloton' %}">главную</a>.</p>
+</div>
+{% endblock %}

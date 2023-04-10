@@ -1,0 +1,9 @@
+{% extends 'index.html' %}
+{% block title %}<title>{{ section.title }}</title>{% endblock %}
+{% block description %}
+    <meta name="description" content="Список продуктов из раздела {{ section.title }}" />
+{% endblock %}
+{% block keywords %}
+    <meta name="keywords" content="список продуктов, список продуктов раздел, {{ section.title|lower }}" />
+{% endblock %}
+{% block header %}<h3>{{ section.title }}</h3>{% endblock %}

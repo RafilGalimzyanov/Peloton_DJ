@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+{% block title %}<title>Отзыв</title>{% endblock %}
+{% block description %}<meta name="description" content="Отзыв о компании" />{% endblock %}
+{% block keywords %}
+<meta name="keywords" content="отзыв, отзыв о компании" />
+{% endblock %}
+{% block content %}
+
+        <h2>Отзывы клиентов</h2>
+<!--<td> {{request.user.email}}</td>-->
+<!--<td> {{request.user.first_name}}:</td>-->
+<tr>
+        {% for review in reviews %}
+    <td><p><b>Почта:</b> {{ review.email }}</p></td>
+    <td><p><b>Имя:</b> {{ review.name }}</p></td>
+        <td><p class="end_p">{{ review.rev }}</p></td><br>
+        {% endfor %}
+</tr>
+<form action="" method="POST">
+    {% csrf_token %}
+    <div>
+    {% for field in form %}
+    <div class="form-group">
+        {{field.label_tag}}
+        <div>{{field}}</div>
+        <div class="error">{{field.errors}}</div>
+    </div>
+    {% endfor %}
+    </div>
+    {% if form %}
+    <p><input type="submit" value="Опубликовать" ></p>
+    {% endif %}
+</form>
+
+
+{% endblock %}

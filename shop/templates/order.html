@@ -1,0 +1,69 @@
+{% extends 'main.html' %}
+{% block title %}<title>Оформление заказа</title>{% endblock %}
+{% block description %}<meta name="description" content="Оформление заказа " />{% endblock %}
+{% block keywords %}
+<meta name="keywords" content="заказ, оформление заказа, оформление заказа продукты" />
+{% endblock %}
+{% block content %}
+    <div id="order">
+        <h2>Оформление заказа</h2>
+        <form name="order" action="" method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <table>
+                <tr>
+                    <td class="w120">{{ form.name.label }}:</td>
+                    <td>{{ form.name }}</td>
+                    <td>{{ form.name.errors }}</td>
+                </tr>
+                <tr>
+                    <td class="w120">{{ form.surname.label }}:</td>
+                    <td>{{ form.surname }}</td>
+                    <td>{{ form.surname.errors }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.phone.label }}:</td>
+                    <td>{{ form.phone }}</td>
+                    <td>{{ form.phone.errors }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.email.label }}:</td>
+                    <td>{{ form.email }}</td>
+                    <td>{{ form.email.errors }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.delivery.label }}:</td>
+                    <td>{{ form.delivery }}</td>
+                    <td>{{ form.delivery.errors }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.time_delivery.label }}:</td>
+                    <td>{{ form.time_delivery }}</td>
+                    <td>{{ form.time_delivery.errors }}</td>
+                </tr>
+            </table>
+            <table>
+                <tr id="address">
+                    <td>
+                        <p>{{ form.address.label }}:</p>
+                           {{ form.address }}
+                    </td>
+                    <td>{{ form.address.errors }}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>{{ form.notice.label }}:</p>
+                           {{ form.notice }}
+                    </td>
+                    <td>{{ form.notice.errors }}</td>
+                </tr>
+                <tr>
+                    <td class="button">
+                        {% load static %}
+                        <input type="image" src="{% static 'images/order_end.png' %}" alt="Закончить оформление заказа" onmouseover="this.src='{% static 'images/order_end_active.png' %}'" onmouseout="this.src='{% static 'images/order_end.png' %}'" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+{% endblock %}

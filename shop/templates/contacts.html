@@ -1,0 +1,62 @@
+{% extends 'main.html' %}
+{% block title %}<title>КОНТАКТЫ</title>{% endblock %}
+{% block description %}<meta name="description" content="Контакты магазина." />{% endblock %}
+{% block keywords %}
+    <meta name="keywords" content="контакты, обратная связь, обратная связь администрация" />
+{% endblock %}
+{% block content %}
+<div id="article">
+    <h2>Контакты</h2>
+    <p>Наш офис находится по адресу г. Красноярск, проспект Свободный, дом 60А</p>
+    <p>Мы работаем с 09:00 до 18:00 с понедельника по пятницу, обеденный перерыв с 13:00 до 14:00.</p>
+    <p>Наши телефоны и электронная почта,чтобы всегда быть на связи:</p>
+     <p>+7 (391) 244-35-74</p>
+     <p>+7 (391) 290-35-43</p>
+     <p>office@peloton.ru</p>
+</div>
+<div id="map" style="width:735px; height:450px"></div>
+<script src="//api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
+<script src="https://yandex.st/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+ymaps.ready(init);
+
+function init () {
+    var myMap = new ymaps.Map("map", {
+            center: [56.018164, 92.789502],
+            zoom: 17
+        }),
+        myPlacemark = new ymaps.Placemark([56.018164, 92.789502], {
+            // Чтобы балун и хинт открывались на метке, необходимо задать ей определенные свойства.
+            balloonContentHeader: "Пелотон-маркет",
+            balloonContentBody: "<em>г. Красноярск, проспект Свободный, дом 60А</em>",
+            balloonContentFooter: "Ждём Вас!",
+            hintContent: "Мы здесь!"
+        });
+	// элемента управления и его параметры.
+    myMap.controls
+        // Кнопка изменения масштаба.
+        .add('zoomControl', { left: 5, top: 5 })
+        // Список типов карты
+        .add('typeSelector')
+        // Кнопка изменения масштаба - компактный вариант.
+        // Расположим её справа.
+        .add('smallZoomControl', { right: 5, top: 75 })
+        // Стандартный набор кнопок
+        .add('mapTools', { left: 35, top: 5 });
+    myMap.geoObjects.add(myPlacemark);
+
+    // Показываем хинт на карте (без привязки к геообъекту).
+    myMap.hint.show(myMap.getCenter(), "Содержимое хинта", {
+        // Опция: задержка перед открытием.
+        showTimeout: 1500
+    });
+}
+</script>
+<p>Наш склад находится по адресу г. Красноярск, ул. Северное Шоссе, дом 17Д</p>
+    <p>График работы с 08:00 до 00:00 с понедельника по субботу, обеденный перерыв с 13:00 до 14:00.</p>
+   <div style="position:relative;overflow:hidden;width:735px; height:450px">
+    <a href="https://yandex.ru/maps/62/krasnoyarsk/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px; width:735px; height:450px">Красноярск</a>
+    <a href="https://yandex.ru/maps/62/krasnoyarsk/house/severnoye_shosse_17d/bUsYfwViTUwAQFtsfXx2cHtgYQ==/?ll=92.922496%2C56.071736&utm_medium=mapframe&utm_source=maps&z=16" style="color:#eee;font-size:12px;position:absolute;top:14px;width:735px; height:450px">Северное шоссе, 17Д — Яндекс Карты</a>
+    <iframe src="https://yandex.ru/map-widget/v1/?ll=92.922496%2C56.071736&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgg1NjQ0MTQwOBJF0KDQvtGB0YHQuNGPLCDQmtGA0LDRgdC90L7Rj9GA0YHQuiwg0KHQtdCy0LXRgNC90L7QtSDRiNC%2B0YHRgdC1LCAxN9CUIgoNUti5QhV1SWBC&z=16" width="560" height="400" frameborder="1" allowfullscreen="true" style="position:relative;width:735px; height:450px"></iframe>
+</div>
+{% endblock %}

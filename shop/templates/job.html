@@ -1,0 +1,37 @@
+{% extends 'main.html' %}
+{% block title %}<title>Вакансии</title>{% endblock %}
+{% block description %}<meta name="description" content="Вакансии" />{% endblock %}
+{% block keywords %}
+<meta name="keywords" content="вакансии, работа у нас" />
+
+{% endblock %}
+{% block content %}
+<div id="jobs">
+<h2>Работа в ГК Пелотон</h2>
+    <p>Работать в нашей компании интересно и перспективно! Вот список актуальных вакансий:</p>
+    <table  border="1" id="vakancy">
+        <tr>
+            <th>Вакансия</th>
+            <th>Опыт работы</th>
+            <th>Обязанности</th>
+            <th>Требования</th>
+            <th>Условия труда</th>
+            <th>З/п</th>
+        </tr>
+        <tr>
+    {% for job in jobs %}
+            <td align="center" valign="top">{{ job.vakancy }}</td>
+            {% if job.opit %}
+                <td align="center" valign="center">+</td>
+            {% else %}
+                <td align="center" valign="center">-</td>
+            {% endif %}
+            <td align="center" valign="center">{{ job.obyazanosti}}</td>
+            <td align="center" valign="center">{{ job.trebovaniya }}</td>
+            <td align="center" valign="center">{{ job.usloviya }}</td>
+            <td align="center" valign="center">{{ job.zp }}</td>
+        </tr>
+     {% endfor %}
+    </table>
+</div>
+{% endblock %}
