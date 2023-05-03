@@ -197,7 +197,6 @@ def cart(request):
     products = []
     if cart_info:
         for product_id in cart_info:
-            #product = get_object_or_404(Product, pk=product_id)
             try:
                 product = Product.objects.get(pk=product_id)
                 product.count = cart_info[product_id]
@@ -244,7 +243,6 @@ def update_cart_info(request):
             cart_info[product_id] -= 1
         request.session['cart_info'] = cart_info
         return HttpResponseRedirect(reverse('cart'))
-    # print('discount =', request.session.get('discount', ''))
 
 
 def order(request):
