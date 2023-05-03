@@ -2,7 +2,6 @@ from django import forms
 from django.core.exceptions import ValidationError
 
 from shop.models import *
-from django.forms import ModelForm
 
 
 
